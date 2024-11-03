@@ -16,7 +16,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js")
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+const MONGO_URL = "mongodb://127.0.0.1:/wanderlust";
 
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -65,8 +65,7 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.locals.success = req.flash('success'); 
   res.locals.error = req.flash('error'); 
-
-  // console.log(success);
+  res.locals.currUser = req.user;
   next();
 })
 
